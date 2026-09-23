@@ -82,7 +82,7 @@ Core operations: PUT, GET, DELETE. The library application is the
 workload used to demonstrate the underlying distributed-systems and OS
 concepts.
 
-LSM-Tree Storage
+**LSM-Tree Storage**
 
 Client request → WAL → MemTable → flush → SSTable → compaction
 
@@ -98,7 +98,7 @@ Tombstone: represents deletes.
 Compaction: merges SSTables, removes obsolete
 versions/tombstones when safe, and controls read/storage overhead.
 
-Raft Consensus
+**Raft Consensus**
 
 A typical three-node cluster has one leader and followers. A write is
 appended to the leader's log, replicated to followers, committed after
@@ -117,7 +117,7 @@ Delete. Client routing will direct requests to the current leader.
 Retries may cause duplicate delivery, so request/operation IDs and
 idempotency rules will be used where needed for library actions.
 
-Concurrency
+**Concurrency**
 
 The store must support multiple simultaneous clients. Go goroutines,
 mutexes/RWMutexes, channels and atomic operations will be used where
@@ -127,14 +127,14 @@ go test ./...
 go test -race ./...
 go test -bench=. ./...
 
-Kubernetes and Helm
+**Kubernetes and Helm**
 
 The final deployment will run multiple KV nodes in Kubernetes. A Helm
 chart will package the deployment and services. Local development can
 use kind; the deployment can be adapted to managed Kubernetes such
 as EKS/GKE.
 
-Observability
+**Observability**
 
 Prometheus will collect metrics such as request count, errors, request
 latency, Raft leader changes, commit progress, flushes and compactions.
@@ -142,7 +142,7 @@ Grafana will display dashboards for request rate, latency, resource
 usage, leader status and errors. Dashboard JSON will be versioned in
 GitHub.
 
-Fault Injection
+**Fault Injection**
 
 Controlled failures will include leader termination, follower
 termination, restart/rejoin and other documented disruptions. Each
@@ -161,9 +161,9 @@ Node 2 becomes Leader
         ↓
 Writes continue through the new leader
 
-Weekly Milestones
+**Weekly Milestones**
 
-Weeks 1--2 --- Foundation
+**Weeks 1--2 --- Foundation**
 
 Topic locked
 
@@ -173,7 +173,7 @@ GitHub repository and Go scaffold
 
 basic KV API
 
-Weeks 3--4 --- LSM Storage
+**Weeks 3--4 --- LSM Storage**
 
 WAL
 
@@ -189,7 +189,7 @@ recovery
 
 benchmark against RocksDB where practical
 
-Weeks 5--6 --- Concurrency
+**Weeks 5--6 --- Concurrency**
 
 concurrent in-memory structures
 
@@ -197,7 +197,7 @@ race-detector validation
 
 benchmarks
 
-Weeks 7--8 --- Distributed Primitives
+**Weeks 7--8 --- Distributed Primitives**
 
 gRPC service
 
@@ -207,7 +207,7 @@ multi-node communication
 
 at-least-once semantics
 
-Weeks 9--10 --- Raft
+**Weeks 9--10 --- Raft**
 
 leader election
 
@@ -221,7 +221,7 @@ state-machine application
 
 safety tests
 
-Weeks 11--12 --- Production Infrastructure
+**Weeks 11--12 --- Production Infrastructure**
 
 Kubernetes deployment
 
@@ -257,7 +257,7 @@ multi-node Kubernetes live demo
 
 performance benchmark report versus selected reference systems
 
-Repository Structure
+**Repository Structure**
 
 distributed-kv-store/
 ├── cmd/
@@ -290,7 +290,7 @@ distributed-kv-store/
 ├── go.sum
 └── README.md
 
-Technology Stack
+**Technology Stack**
 
 Area                Technology
 
@@ -309,7 +309,7 @@ Benchmarking        Go benchmarks
 Version control     Git + GitHub
 Reference systems   RocksDB / etcd / TiKV
 
-Development and Run Commands
+**Development and Run Commands**
 
 Prerequisites: Go, Git, Docker, kubectl, kind, Helm and protoc/gRPC
 plugins.
@@ -321,7 +321,7 @@ kubectl version --client
 kind version
 helm version
 
-Run tests:
+**Run tests:**
 
 go test ./...
 go test -race ./...
@@ -330,12 +330,12 @@ Run the current development node:
 
 go run ./cmd/kvnode -addr :8080 -data ./data
 
-Example health check:
+**Example health check:**
 
 curl http://localhost:8080/health
 # ok
 
-Example KV operations:
+**Example KV operations:**
 
 curl -X PUT http://localhost:8080/kv/book:101 \
   -H "Content-Type: application/json" \
@@ -348,14 +348,14 @@ curl -X DELETE http://localhost:8080/kv/book:101
 The exact commands and endpoints should be updated if the final gRPC
 interface differs from the initial development API.
 
-Benchmarking
+**Benchmarking**
 
 The final report will record throughput, average/p50/p95/p99 latency,
 CPU, memory, storage usage, compaction cost and recovery time. Every
 reported number should include the workload, node count,
 hardware/environment and command/configuration used.
 
-Testing Evidence
+**Testing Evidence**
 
 The repository should contain evidence for:
 
@@ -375,7 +375,7 @@ leader/follower failure tests
 
 node restart/rejoin tests
 
-benchmark output
+**benchmark output**
 
 Kubernetes deployment
 
@@ -383,7 +383,7 @@ Prometheus/Grafana screenshots
 
 fault-injection results
 
-Final Demo
+**Final Demo**
 
 Start a three-node cluster.
 
@@ -407,7 +407,7 @@ Show Grafana metrics.
 
 Present measured benchmark and fault-test results.
 
-Team Contributions
+**Team Contributions**
 
 Member 1: LSM/WAL/storage and storage benchmarks
 
