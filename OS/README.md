@@ -9,7 +9,7 @@ storage engine for persistent data, gRPC for client communication,
 and Kubernetes for multi-node deployment and observability. The
 system is demonstrated through a Library Management use case.
 
-Project Status
+**Project Status**
 
 Status: In Progress --- Live Build
 
@@ -17,7 +17,7 @@ The project is developed incrementally: basic KV store → WAL/MemTable →
 LSM-tree → concurrency → gRPC → Raft → Kubernetes → observability →
 fault injection → benchmarking.
 
-Objectives
+**Objectives**
 
 Build a distributed key-value store from scratch.
 
@@ -41,7 +41,7 @@ behavior.
 Compare measured performance with established systems such as
 RocksDB, etcd and TiKV where practical.
 
-Architecture
+**Architecture**
 
 Library Client
       |
@@ -67,7 +67,7 @@ Node 2    Node 3
 
 Kubernetes hosts the nodes; Prometheus collects metrics and Grafana visualizes them.
 
-Library Management Use Case
+**Library Management Use Case**
 
 Example records:
 
